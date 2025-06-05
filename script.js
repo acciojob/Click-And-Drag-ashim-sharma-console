@@ -1,11 +1,21 @@
- const container = document.querySelector('.container');
-    const cubes = document.querySelectorAll('.cube');
+ const container = document.getElementById('container');
 
+    const numberOfCubes = 4; // Number of cubes to generate
+    const cubes = []; // Store the created cubes
+
+    for (let i = 0; i < numberOfCubes; i++) {
+      const cube = document.createElement('div');
+      cube.classList.add('cube');
+      container.appendChild(cube);
+      cubes.push(cube);
+    }
+
+    // Variables for drag functionality
     let selectedCube = null;
     let offsetX = 0;
     let offsetY = 0;
 
-    // Arrange cubes initially in a grid using absolute positions
+    // Set initial positions for the cubes
     const spacing = 100;
     cubes.forEach((cube, index) => {
       const col = index % 2;
@@ -16,7 +26,6 @@
       // Mouse down: start drag
       cube.addEventListener('mousedown', (e) => {
         selectedCube = cube;
-
         const rect = container.getBoundingClientRect();
         offsetX = e.clientX - rect.left - cube.offsetLeft;
         offsetY = e.clientY - rect.top - cube.offsetTop;
